@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/Slime.png" type="Texture" id=2]
+
+[node name="enemy_slime" instance=ExtResource( 1 )]
+hp = 13
+damage = 2
+experience = 2
+
+[node name="hover_info" parent="." index="0"]
+margin_left = -22.0
+margin_top = -10.0
+margin_right = 20.0
+margin_bottom = 11.0
+description = "Insert generic description here"
+
+[node name="spr_rat" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="l_hp" parent="." index="2"]
+text = "14 Hp"

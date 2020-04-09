@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/btn_action.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/btn_action_block.gd" type="Script" id=2]
+
+[node name="btn_action_block" instance=ExtResource( 1 )]
+text = "BLOCK"
+script = ExtResource( 2 )

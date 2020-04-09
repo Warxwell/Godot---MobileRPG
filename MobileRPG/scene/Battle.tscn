@@ -1,0 +1,192 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/Battle.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Dungeon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/Mobile RPG Mockup.png" type="Texture" id=3]
+[ext_resource path="res://scene/enemy_slime.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/player_stats.gd" type="Script" id=5]
+[ext_resource path="res://scripts/stats_panel.gd" type="Script" id=6]
+[ext_resource path="res://scene/btn_action_sword.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scene/btn_action_heal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scene/enemy_rat.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scripts/text_box.gd" type="Script" id=10]
+[ext_resource path="res://scene/btn_action_block.tscn" type="PackedScene" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Animation" id=2]
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("fade:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Battle" type="Node"]
+script = ExtResource( 1 )
+enemies = [ ExtResource( 9 ), ExtResource( 4 ) ]
+
+[node name="player_stats" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Dungeon" type="Sprite" parent="."]
+position = Vector2( 45, 80 )
+texture = ExtResource( 2 )
+
+[node name="Mobile RPG Mockup" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 45, 80 )
+texture = ExtResource( 3 )
+
+[node name="enemy_position" type="Position2D" parent="."]
+position = Vector2( 46, 31 )
+
+[node name="enemy_slime" parent="enemy_position" instance=ExtResource( 4 )]
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="center_cont" type="CenterContainer" parent="UI"]
+margin_right = 90.0
+margin_bottom = 49.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_next_room" type="Button" parent="UI/center_cont"]
+visible = false
+margin_left = 22.0
+margin_top = 18.0
+margin_right = 67.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 45, 13 )
+text = "NEXT ROOM"
+
+[node name="stats_panel" type="Panel" parent="UI"]
+margin_left = 3.0
+margin_top = 49.0
+margin_right = 87.0
+margin_bottom = 70.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stats_container" type="HBoxContainer" parent="UI/stats_panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lbl_hp" type="Label" parent="UI/stats_panel/stats_container"]
+margin_right = 25.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "HP
+25"
+align = 1
+
+[node name="lbl_ap" type="Label" parent="UI/stats_panel/stats_container"]
+margin_left = 29.0
+margin_right = 54.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "AP
+3"
+align = 1
+
+[node name="lbl_mp" type="Label" parent="UI/stats_panel/stats_container"]
+margin_left = 58.0
+margin_right = 84.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "MP
+10"
+align = 1
+
+[node name="txtbox_panel" type="Panel" parent="UI"]
+margin_left = -2.0
+margin_top = 137.0
+margin_right = 92.0
+margin_bottom = 162.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text_box" type="RichTextLabel" parent="UI/txtbox_panel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 91.0
+margin_bottom = 22.0
+custom_styles/normal = SubResource( 1 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_constants/line_separation = 2
+scroll_active = false
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="battle_action_btns" type="GridContainer" parent="UI"]
+margin_left = 9.0
+margin_top = 73.0
+margin_right = 81.0
+margin_bottom = 134.0
+custom_constants/vseparation = 3
+custom_constants/hseparation = 8
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_action_sword" parent="UI/battle_action_btns" instance=ExtResource( 7 )]
+margin_right = 32.0
+margin_bottom = 13.0
+
+[node name="btn_action_heal" parent="UI/battle_action_btns" instance=ExtResource( 8 )]
+margin_left = 40.0
+margin_right = 72.0
+margin_bottom = 13.0
+
+[node name="btn_action_block" parent="UI/battle_action_btns" instance=ExtResource( 11 )]
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 29.0
+
+[node name="fade" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/new_room_fade = SubResource( 2 )
+[connection signal="ap_changed" from="player_stats" to="UI/stats_panel" method="_on_player_stats_ap_changed"]
+[connection signal="hp_changed" from="player_stats" to="UI/stats_panel" method="_on_player_stats_hp_changed"]
+[connection signal="mp_changed" from="player_stats" to="UI/stats_panel" method="_on_player_stats_mp_changed"]
+[connection signal="pressed" from="UI/center_cont/btn_next_room" to="." method="_on_btn_next_room_pressed"]

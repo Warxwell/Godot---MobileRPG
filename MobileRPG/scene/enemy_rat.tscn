@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene/Enemy.tscn" type="PackedScene" id=1]
+
+[node name="enemy_rat" instance=ExtResource( 1 )]
+experience = 3
+
+[node name="hover_info" parent="." index="0"]
+description = "If you only had some cheese"
